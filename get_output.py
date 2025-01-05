@@ -1,9 +1,6 @@
 from scipy.io.wavfile import write
 import sounddevice as REC
 
-# Recording properties
-SECONDS = 10
-
 def get_speaker(filename, time, SAMPLE_RATE = 44100):
     # Command to get all devices listed: py -m sounddevice 
     # Device you want to record
