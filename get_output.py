@@ -1,6 +1,12 @@
 from scipy.io.wavfile import write
 import sounddevice as REC
 
+def checkSilence(x):
+  if abs(x[0]) < 1e-03:
+    return False
+  else:
+    return True
+
 def get_speaker(filename, time, SAMPLE_RATE = 44100):
     # Command to get all devices listed: py -m sounddevice 
     # Device you want to record
@@ -14,6 +20,7 @@ def get_speaker(filename, time, SAMPLE_RATE = 44100):
     # Starts recording
     recording = REC.rec( int(time * SAMPLE_RATE), samplerate = SAMPLE_RATE, channels = 1)
     REC.wait()  # Waits for recording to finish
-
-    # Writes recorded data in to the wave file
-    write(filename, SAMPLE_RATE, recording)
+    temp_rec = recording
+    if (list(filter(checkSilence, temp_rec))): #If recorded silence, skip it
+        # Writes recorded data in to the wave file
+        write(filename, SAMPLE_RATE, recording)
