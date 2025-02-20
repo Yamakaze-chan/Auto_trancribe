@@ -22,7 +22,7 @@ temp_var = True
 def get_sound():
     while(temp_var):
         filename = pathFolder+str(uuid.uuid4())+".wav"
-        get_speaker(filename, 30)
+        get_speaker(filename, 10, 10) #I am using Stereo Mix, but it would be better if you have better way to record the output sound
 
 # Get transcription from recorded files
 def get_transcribe():
